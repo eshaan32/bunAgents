@@ -1,1 +1,1 @@
-console.log("Hello via Bun --watch!");
+console.log("Welcome to Agents via Bun --watch!");

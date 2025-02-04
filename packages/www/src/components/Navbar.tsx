@@ -14,6 +14,23 @@ export default function Navbar() {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true);
+      // Simulate a network call with a timeout
+      setTimeout(() => {
+        // Example user data
+        const userData: User = {
+          image: '/user-avatar.png',
+          name: 'John Doe'
+        };
+        setUser(userData);
+        setLoading(false);
+      }, 500);
+    };
+
+    fetchUser();
+  }, []);
 
 
   return (
@@ -33,12 +50,23 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            >
-              Sign in
-            </Link>
+            {loading ? (
+              <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse" />
+            ) : user ? (
+              <div className="relative w-8 h-8">
+                <Avatar>
+                  <AvatarImage src={user.image || '/default-avatar.png'} />
+                  <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                </Avatar>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              >
+                Sign in
+              </Link>
+            )}
           </div>
         </div>
       </div>

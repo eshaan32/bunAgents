@@ -1,13 +1,7 @@
 // movies slug page
 // renders the detailed view for a particular movie passed by the [slug] parameter
 
-export function generateStaticParams({ params }: { params: { slug: string } }) {
-  return [
-    {
-      slug: params.slug
-    }
-  ]
-}
+export function generateStaticParams() { }
 
 
 export default function MovieDetail({ params }: { params: { slug: string } }) {

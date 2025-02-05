@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import AuthBadge from './AuthBadge'
+import Menu from './Menu'
 import movierooIcon from "../app/movieroo-icon.png"
 
 export default function Navbar() {
@@ -22,8 +23,11 @@ export default function Navbar() {
               />
             </Link>
           </div>
-
-          <AuthBadge />
+          {/* badge and menu */}
+          <div className="flex items-center gap-4">
+            <Menu />
+            <AuthBadge />
+          </div>
         </div>
       </div>
     </nav >

@@ -17,13 +17,11 @@
 //     }
 //   ]
 // }
-
+type Params = Promise<{ slug: string }>
 export default async function MovieDetail({
   params
 }: {
-  params: {
-    slug: Promise<string>
-  }
+  params: Params
 }) {
   const { slug } = await params
   // after fetching slug, make api call passing slug to get movie details

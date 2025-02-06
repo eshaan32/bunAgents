@@ -8,7 +8,7 @@
 
 import Link from 'next/link'
 
-export type Movie = {
+type Movie = {
   id: string
   slug: string
   title: string
@@ -19,7 +19,7 @@ export type Movie = {
   description: string
 }
 
-export const movies: Movie[] = [
+const movies: Movie[] = [
   {
     id: '1',
     slug: 'the-last-horizon',
@@ -122,7 +122,7 @@ export const movies: Movie[] = [
   },
 ]
 
-export default function MoviePage() {
+export default function MoviesPage() {
   return (
     <>
       <main className='min-h-screen flex flex-col items-center justify-center'>

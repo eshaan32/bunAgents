@@ -125,26 +125,24 @@ const movies: Movie[] = [
 export default function MoviesPage() {
   return (
     <>
-      <main className='min-h-screen flex flex-col items-center justify-center'>
-        <h1 className='text-3xl font-bold mb-8 text-center'>Movies</h1>
-        <div className='z-10 max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {movies.map((movie) => (
-            <div
-              key={movie.id}
-              className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200 ease-in-out"
-            >
-              <Link href={`/movies/${movie.slug}`}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{movie.title}</h2>
-              </Link>
-              <p className="text-gray-700">Directed by: {movie.director}</p>
-              <p className="text-gray-600">Release Year: {movie.releaseYear}</p>
-              <p className="text-gray-600">Genre: {movie.genre}</p>
-              <p className="text-gray-600">Rating: {movie.rating}</p>
-              <p className="text-gray-500 mt-4">{movie.description}</p>
-            </div>
-          ))}
-        </div>
-      </main>
+      <h1 className='text-3xl font-bold mb-8 text-center'>Movies</h1>
+      <div className='z-10 max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {movies.map((movie) => (
+          <div
+            key={movie.id}
+            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200 ease-in-out"
+          >
+            <Link href={`/movies/${movie.slug}`}>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">{movie.title}</h2>
+            </Link>
+            <p className="text-gray-700">Directed by: {movie.director}</p>
+            <p className="text-gray-600">Release Year: {movie.releaseYear}</p>
+            <p className="text-gray-600">Genre: {movie.genre}</p>
+            <p className="text-gray-600">Rating: {movie.rating}</p>
+            <p className="text-gray-500 mt-4">{movie.description}</p>
+          </div>
+        ))}
+      </div>
     </>
   )
 }

@@ -8,7 +8,7 @@ export default function Menu() {
         <Link href="/movies">Movies</Link>
       </Button>
       <Button variant="link">
-        <Link href="/my-lists">My Lists</Link>
+        <Link href="/lists">My Lists</Link>
       </Button>
     </div>
   )

@@ -15,16 +15,17 @@ datasource db {
 }
 
 model User {
-  id            String       @id @default(uuid()) // id of the user
-  email         String    @unique // email of the user
-  name          String? // name of the user
-  movies        Movie[] // movies is a table that stores the user's favorited movies
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
+  id              String    @id @default(uuid()) // id of the user
+  email           String    @unique // email of the user
+  name            String? // name of the user
+  movies          Movie[] // movies is a table that stores the user's favorited movies
+  emailVerified   Boolean
+  image           String?
+  createdAt       DateTime
+  updatedAt       DateTime
+  sessions        Session[]
+  accounts        Account[]
+  profileImageUrl String? // url of the user's profile image
 
   @@map("user")
 }

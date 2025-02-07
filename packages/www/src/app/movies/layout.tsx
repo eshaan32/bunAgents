@@ -15,9 +15,12 @@ export default function MovieLayout({
   children: React.ReactNode
 }) {
   return (
-    <section className="flex flex-col items-center justify-center p-16">
-      {/* <h1 className='text-3xl font-bold mb-8 text-center p-4'>Movie Layout</h1> */}
-      {children}
-    </section>
+    <>
+      <main>
+        <div className="flex flex-col items-center justify-center p-16">
+          {children}
+        </div>
+      </main>
+    </>
   )
 }

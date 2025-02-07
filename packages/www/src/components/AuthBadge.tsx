@@ -1,51 +1,35 @@
-'use client'
+'use server'
+
+// export const dynamic = "force-dynamic"
+// export const fetchCache = 'default-no-store'
+// export const revalidate = 0
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
+import AvatarDropdown from './AvatarDropDown'
+import { revalidatePath } from 'next/cache'
 
-import { User } from '@/types'
+export default async function AuthBadge() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
 
-export default function AuthBadge() {
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      setLoading(true);
-      // Simulate a network call with a timeout
-      setTimeout(() => {
-        // Example user data
-        const userData: User = {
-          image: '/user-avatar.png',
-          name: 'Eshaan Joshi'
-        };
-        setUser(userData);
-        setLoading(false);
-      }, 500);
-    };
-
-    fetchUser();
-  }, []);
+  // This function can be called from the client
+  async function revalidateAuth() {
+    'use server'
+    revalidatePath('/', 'layout') // Revalidate the entire layout since navbar is likely in root layout
+  }
+  console.log(session)
+  const user = session?.user
 
   return (
     <div className="flex items-center gap-4">
-      {loading ? (
-        <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />
-      ) : user ? (
-        <div className="relative w-10 h-10 transition-all">
-          <Avatar className='hover:scale-110 transition-all duration-500 ease-in'>
-            <AvatarImage src={user.image || '/default-avatar.png'} />
-            <AvatarFallback>{
-              user.name?.split(" ")
-                .map((name) => name.charAt(0))
-                .join("")}
-            </AvatarFallback>
-          </Avatar>
-        </div>
+      {user ? (
+        <AvatarDropdown user={user} revalidateAuth={revalidateAuth} />
       ) : (
         <Link
-          href="/login"
+          href="/sign-in"
           className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
         >
           Sign in

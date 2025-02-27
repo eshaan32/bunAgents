@@ -17,6 +17,30 @@
 //     }
 //   ]
 // }
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+
+// Example movie data fetching function
+async function getMovieDetails(slug: string) {
+  // In a real app, this would be an API call or database query
+  // This is just a placeholder implementation
+  return {
+    id: slug,
+    title: `Movie ${slug}`,
+    description: `This is the description for movie ${slug}`,
+    releaseDate: '2023-01-01',
+    rating: 4.5,
+    genres: ['Action', 'Adventure']
+  }
+}
+
 type Params = Promise<{ slug: string }>
 export default async function MovieDetail({
   params
@@ -24,12 +48,34 @@ export default async function MovieDetail({
   params: Params
 }) {
   const { slug } = await params
-  // after fetching slug, make api call passing slug to get movie details
 
+  // Fetch movie details using the slug
+  const movie = await getMovieDetails(slug)
 
   return (
-    <div>
-      <h1>{slug}</h1>
+    <div className="container mx-auto py-8">
+      <Card className="overflow-hidden">
+        <CardHeader>
+          <CardTitle className="text-3xl">{movie.title}</CardTitle>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {movie.genres.map(genre => (
+              <Badge
+                key={genre}
+                variant="secondary"
+              >
+                {genre}
+              </Badge>
+            ))}
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-700 dark:text-gray-300">{movie.description}</p>
+        </CardContent>
+        <CardFooter className="flex justify-between text-sm text-gray-500 dark:text-gray-400 border-t pt-4">
+          <span>Released: {movie.releaseDate}</span>
+          <span>Rating: {movie.rating}/5</span>
+        </CardFooter>
+      </Card>
     </div>
   )
 }

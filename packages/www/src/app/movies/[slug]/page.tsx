@@ -27,7 +27,6 @@ export default async function MovieDetail({
   // after fetching slug, make api call passing slug to get movie details
 
 
-  console.log(`slug: ${slug}`)
   return (
     <div>
       <h1>{slug}</h1>
